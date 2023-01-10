@@ -5,8 +5,8 @@ from Model.Constantes import *
 
 #
 # Modélisation d'une cellule de la grille d'un démineur
-#
-
+# 
+ 
 
 def type_cellule(cell: dict) -> bool:
     """

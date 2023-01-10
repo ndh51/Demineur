@@ -1,5 +1,16 @@
 *.json
 *pyc
-*.vscode
+.vscode
 *.cfg
 __pycache__
+*.bat
+*.ps1
+*.exe
+*.db
+/venv/*
+*.gif
+*.html
+*.css
+*.pmm
+sae1_minesweeper/venv/*
+
