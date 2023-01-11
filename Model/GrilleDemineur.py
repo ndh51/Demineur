@@ -52,3 +52,12 @@ def type_grille_demineur(grille: list) -> bool:
     # return True
 
 
+def construireGrilleDemineur(lin:int, col:int)->list:
+    if ent1<=0 or ent2<=0:
+        raise ValueError("construireGrilleDemineur : Lenombre de lignes (valeur_du_premier_paramètre) ou de colonnes (valeur_du_second_paramètre) est négatif ou nul. ")
+    else :
+        l=[]
+        for i in range(lin):
+            for j in range(col):
+
+    return l

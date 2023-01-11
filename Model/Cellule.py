@@ -22,7 +22,7 @@ def type_cellule(cell: dict) -> bool:
 
 
 def isContenuCorrect(contenu: int) -> bool:
-    if type(contenu) == int and 0 <= contenu <= 8 or type(contenu) == int and  contenu == const.ID_MINE:
+    if type(contenu) == int and 0 <= contenu <= 8 or type(contenu) == int and contenu == const.ID_MINE:
         res = True
     else:
         res = False
@@ -51,6 +51,8 @@ def isVisibleCellule(dico: dict)->bool:
     return dico[const.VISIBLE]
 
 def setContenuCellule(dico:dict,contenu:int)->None:
+    if type(contenu)!=int:
+        raise TypeError(f"setContenuCellule : le type du contenu \"{contenu}\" n’est pas correcte. ")
     if not isContenuCorrect(contenu):
         raise ValueError(f"setContenuCellule : la valeur du contenu \"{contenu}\" n’est pas correcte. ")
     if not type_cellule(dico):
