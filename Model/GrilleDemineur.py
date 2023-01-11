@@ -65,6 +65,7 @@ def construireGrilleDemineur(lin:int, col:int)->list:
             ll.append(l)
             for j in range(col):
                 l.append(construireCellule(0, False))
+            l=[]
     return ll
 
 def getNbLignesGrilleDemineur(tab:list)->int:
@@ -76,4 +77,20 @@ def getNbColonnesGrilleDemineur(tab:list)->int:
     if not type_grille_demineur(tab):
         raise TypeError("getNbLignesGrilleDemineur : Le paramètre n’est pas une grille")
     return len(tab[0])
+
+def isCoordonneeCorrecte(tab:list,coord:tuple)->bool:
+    if type(coord)!=tuple or not type_grille_demineur(tab) or type(coord[0])!=int or type(coord[1])!=int :
+        raise TypeError(" isCoordonneeCorrecte : un des paramètres n’est pas du bon type.")
+    if 0<=coord[0]<getNbLignesGrilleDemineur(tab) and 0<=coord[1]<getNbColonnesGrilleDemineur(tab):
+        res = True
+    else :
+        res = False
+    return res
+
+def getCelluleGrilleDemineur(tab:list,coord:tuple)->dict:
+    if type(coord)!=tuple or not type_grille_demineur(tab) or type(coord[0])!=int or type(coord[1])!=int:
+        raise TypeError("getCelluleGrilleDemineur : un des paramètres n’est pas du bon type.")
+    if coord[0]>getNbLignesGrilleDemineur(tab) or coord[1]>getNbColonnesGrilleDemineur(tab):
+        raise IndexError("getCelluleGrilleDemineur : coordonnée non contenue dans la grille. ")
+    return tab[coord[0]][coord[1]]
 
