@@ -38,7 +38,7 @@ def construireCellule(ent:int=0,visible:bool=False) -> dict:
         if not isContenuCorrect(ent):
             ent=0
 
-    return {const.CONTENU : ent, const.VISIBLE : visible}
+    return {const.CONTENU : ent, const.VISIBLE : visible,const.ANNOTATION: None}
 
 def getContenuCellule(dico:dict)->int:
     if not type_cellule(dico):
@@ -78,3 +78,9 @@ def contientMineCellule(dico:dict)->bool:
         res=False
     return res
 
+def isAnnotationCorrecte(anno:str)->bool:
+    if anno in[None,const.DOUTE,const.FLAG]:
+        res=True
+    else:
+        res=False
+    return res
