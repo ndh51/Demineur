@@ -136,3 +136,18 @@ def contientMineGrilleDemineur(tab:list,coord:tuple):
     else:
         res=False
     return res
+
+def getCoordonneeVoisinsGrilleDemineur(tab:list,coord:tuple):
+    if not isCoordonneeCorrecte(tab,coord) or not type_grille_demineur(tab):
+        raise TypeError("getCoordonneeVoisinsGrilleDemineur : un des paramètres n’est pas du bon type.")
+    if 0>coord[0] or coord[0]>=getNbLignesGrilleDemineur(tab) or 0>coord[1] or coord[1]>=getNbColonnesGrilleDemineur(tab):
+        raise IndexError("getCoordonneeVoisinsGrilleDemineur : la coordonnée n’est pas dans la grille")
+    else :
+        res=[]
+        for i in range(coord[0]-1,coord[0]+2,1):
+            for j in range(coord[1]-1,coord[1]+2,1):
+                if (i,j)!=coord and 0<=i<getNbLignesGrilleDemineur(tab) and 0<=j<getNbColonnesGrilleDemineur(tab):
+                        res.append((i,j))
+
+        print(res)
+    return res
