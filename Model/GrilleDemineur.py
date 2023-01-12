@@ -94,3 +94,45 @@ def getCelluleGrilleDemineur(tab:list,coord:tuple)->dict:
         raise IndexError("getCelluleGrilleDemineur : coordonnée non contenue dans la grille. ")
     return tab[coord[0]][coord[1]]
 
+def getContenuGrilleDemineur(tab:list,coord:tuple)->dict:
+    if not isCoordonneeCorrecte(tab,coord):
+        res = getCelluleGrilleDemineur(tab, coord)
+    else:
+        res = getCelluleGrilleDemineur(tab, coord)
+
+    return res[const.CONTENU]
+
+def setContenuGrilleDemineur(tab:list,coord:tuple,contenu:int)->None:
+    if not isCoordonneeCorrecte(tab,coord):
+        res = getContenuGrilleDemineur(tab,coord)
+    else:
+        res = getCelluleGrilleDemineur(tab, coord)
+    res[const.CONTENU]=contenu
+    return res
+
+def isVisibleGrilleDemineur(tab:list,coord:tuple)->bool:
+    if not isCoordonneeCorrecte(tab,coord):
+        res = getCelluleGrilleDemineur(tab, coord)
+    else:
+        res = getCelluleGrilleDemineur(tab, coord)
+
+    return res[const.VISIBLE]
+
+def setVisibleGrilleDemineur(tab:list,coord:tuple,visible:int)->bool:
+    if not isCoordonneeCorrecte(tab,coord):
+        res = getContenuGrilleDemineur(tab,coord)
+    else:
+        res = getCelluleGrilleDemineur(tab, coord)
+    res[const.VISIBLE]=visible
+    return res[const.VISIBLE]
+
+def contientMineGrilleDemineur(tab:list,coord:tuple):
+    if not isCoordonneeCorrecte(tab,coord):
+        res = getContenuGrilleDemineur(tab,coord)
+    else:
+        res = getCelluleGrilleDemineur(tab, coord)
+    if res[const.CONTENU]==const.ID_MINE:
+        res=True
+    else:
+        res=False
+    return res
