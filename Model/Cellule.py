@@ -38,7 +38,7 @@ def construireCellule(ent:int=0,visible:bool=False) -> dict:
         if not isContenuCorrect(ent):
             ent=0
 
-    return {const.CONTENU : ent, const.VISIBLE : visible,const.ANNOTATION: None}
+    return {const.CONTENU : ent, const.VISIBLE : visible, const.ANNOTATION : None}
 
 def getContenuCellule(dico:dict)->int:
     if not type_cellule(dico):
@@ -84,3 +84,12 @@ def isAnnotationCorrecte(anno:str)->bool:
     else:
         res=False
     return res
+
+def getAnnotationCellule(cell:dict):
+    # je ne sais pas comment qualifier ce qu'elle renvoie
+    if not type_cellule(cell):
+        raise TypeError("getAnnotationCellule : le paramètre valeur_du paramètre n’est pas une cellule ")
+    if const.ANNOTATION not in cell:
+        return None
+    return cell[const.ANNOTATION]
+
