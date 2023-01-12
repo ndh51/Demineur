@@ -204,3 +204,6 @@ def getNbMinesGrilleDemineur(tab:list)->int:
                 res+=1
     return res
 
+def getAnnotationGrilleDemineur(tab:list,coord:tuple):
+    return getAnnotationCellule(tab[coord[0]][coord[1]])
+
