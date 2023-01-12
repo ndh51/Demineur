@@ -180,6 +180,7 @@ def placerMinesGrilleDemineur(tab: list, nb: int, coord: tuple) -> None:
             setContenuGrilleDemineur(tab,(i,j),const.ID_MINE)
             k -= 1
     compterMinesVoisinesGrilleDemineur(tab)
+    #l'installation de scipy plante sur le venv, j'ai donc du tester avec la version python 3.9 de mon pc mais j'ai tout de meme le doute que la fonction passe le test
     return None
 
 def compterMinesVoisinesGrilleDemineur(tab:list)->None:
