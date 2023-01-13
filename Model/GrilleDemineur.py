@@ -227,8 +227,15 @@ def gagneGrilleDemineur(tab:list)->bool:
                 compt+=1
             if isVisibleGrilleDemineur(tab,(i,j)) and contientMineGrilleDemineur(tab,(i,j)):
                 compt-=1
-            
+
     if compt+nb==(getNbLignesGrilleDemineur(tab)*getNbColonnesGrilleDemineur(tab)):
         return True
     else:
         return False
+
+def perduGrilleDemineur(tab:list)->bool:
+    for i in range(getNbLignesGrilleDemineur(tab)):
+        for j in range(getNbColonnesGrilleDemineur(tab)):
+            if isVisibleGrilleDemineur(tab, (i, j)) and contientMineGrilleDemineur(tab, (i, j)):
+                return True
+    return False
