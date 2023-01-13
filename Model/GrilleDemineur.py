@@ -241,3 +241,10 @@ def perduGrilleDemineur(tab:list)->bool:
             if isVisibleGrilleDemineur(tab, (i, j)) and contientMineGrilleDemineur(tab, (i, j)):
                 return True
     return False
+
+
+def reinitialiserGrilleDemineur(tab:list)->None:
+    for i in range(getNbLignesGrilleDemineur(tab)):
+        for j in range(getNbColonnesGrilleDemineur(tab)):
+            reinitialiserCellule(tab[i][j])
+    return None
