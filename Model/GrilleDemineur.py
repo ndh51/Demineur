@@ -280,6 +280,7 @@ def ajouterFlagsGrilleDemineur(tab:list,coord:tuple)->list:
             decouvert.append(voisin)
             tab[voisin[0]][voisin[1]][const.ANNOTATION]=const.FLAG
     return decouvert
+
 #plusieurs versions ne fonctionnant pas des 3 dernieres fonctions :
 """
 def decouvrirGrilleDemineur(tab:list,coord)->list:
