@@ -246,60 +246,41 @@ def reinitialiserGrilleDemineur(tab:list)->None:
     return None
 
 
-def decouvrirGrilleDemineur(tab:list,coord)->list:
-    setVisibleGrilleDemineur(tab,coord,True)
-    res=[]
-    if getContenuGrilleDemineur(tab,coord)==0:
-        pas_mine=True
-        coo = getCoordonneeVoisinsGrilleDemineur(tab, coord)
-        l=[]
-        while pas_mine:
-            coo=res
-            for i in coo:
-                if getContenuGrilleDemineur(tab,i)==const.ID_MINE:
-                    pas_mine=False
+def decouvrirGrilleDemineur(tab:list,coord:tuple)->list:
+    tab[coord[0]][coord[1]][const.VISIBLE]=True
+    decouvert=[coord]
+    if tab[coord[0]][coord[1]][const.CONT]==0
+        voisins=getCoordonneeVoisinsGrilleDemineur(tab,coord)
+        for voisin in voisins:
+            decouvert.append(decouvrirGrilleDemineur(tab,voisin))
+    return decouvert
 
-            for j in coo:
-                 if coo not in res:
-                    res.append(coo)
+def simplifierGrilleDemineur(tab:list,coord:tuple)->list:
+    if tab[coord[0]][coord[1]][const.VISIBLE]=True:
+        decouvert=[coord]
+        compte_flag=0
+        voisins=getCoordonneeVoisinsGrilleDemineur(tab,coord)
+        for voisin in voisins:
+            if tab[voisin[0]][voisin[1]][const.ANNOTATION]==const.FLAG:
+                compte_flag += 1
+        if compte_flag==tab[voisin[0]][voisin[1]][const.CONTENU]:
+            for voisin in voisins:
+                decouvert.append(simplifierGrilleDemineur(tab,voisin))
+    return decouvert
 
-        for k in range(len(coo)):
-            if getContenuGrilleDemineur(tab,coord)==0:
-                decouvrirGrilleDemineur(tab,coo[k])
-    for i in range(len(res)):
-        setVisibleGrilleDemineur(tab,res[i],True)
-    return None
-
-
-def simplifierGrilleDemineur(tab:list,coord:tuple)->None:
-    if not isVisibleGrilleDemineur(tab,coord):
-        return {}
-    else :
-        coo = getCoordonneeVoisinsGrilleDemineur(tab, coord)
-        compt=0
-        i=0
-        while compt!= getContenuGrilleDemineur(tab,coord) and i<9:
-            if getAnnotationGrilleDemineur(tab,coord)==const.FLAG:
-                compt+=1
-            i+=1
-        for i in range(len(coo)):
-            simplifierGrilleDemineur(tab,coo[i])
-    return coo
-
-
-def ajouterFlagsGrilleDemineur(tab:list,coord: tuple)->list:
+def ajouterFlagsGrilleDemineur(tab:list,coord:tuple)->list:
+    decouvert=[]
     voisins=getCoordonneeVoisinsGrilleDemineur(tab,coord)
-    nombre_voisins=8
-    l=[]
-    for i in range(len(voisins)):
-        if isVisibleGrilleDemineur(tab, voisins[i]):
-            nombre_voisins-=1
-    if nombre_voisins== getContenuGrilleDemineur(tab,coord):
-        for i in voisins:
-            if not isVisibleGrilleDemineur(tab,voisins[i]):
-                setVisibleGrilleDemineur(tab,voisins[i], True)
-                l.append(voisins[i])
-    return l
+    cpt=0
+    for voisin in voisins:
+        if tab[voisin[0]][voisin[1]][const.Visible]==False:
+            cpt+=1
+    if cpt==tab[voisin[0]][voisin[1]][const.CONTENU]:
+        for voisin in voisins:
+            decouvert.append(voisin)
+            tab[voisin[0]][voisin[1]][const.ANNOTATION]=const.FLAG
+    return decouvert
+
 
 def simplifierToutGrilleDemineur(tab:list)->tuple :
     a=[]
