@@ -249,14 +249,14 @@ def reinitialiserGrilleDemineur(tab:list)->None:
 def decouvrirGrilleDemineur(tab:list,coord:tuple)->list:
     tab[coord[0]][coord[1]][const.VISIBLE]=True
     decouvert=[coord]
-    if tab[coord[0]][coord[1]][const.CONT]==0
+    if tab[coord[0]][coord[1]][const.CONTENU]==0:
         voisins=getCoordonneeVoisinsGrilleDemineur(tab,coord)
         for voisin in voisins:
             decouvert.append(decouvrirGrilleDemineur(tab,voisin))
     return decouvert
 
 def simplifierGrilleDemineur(tab:list,coord:tuple)->list:
-    if tab[coord[0]][coord[1]][const.VISIBLE]=True:
+    if tab[coord[0]][coord[1]][const.VISIBLE]==True:
         decouvert=[coord]
         compte_flag=0
         voisins=getCoordonneeVoisinsGrilleDemineur(tab,coord)
