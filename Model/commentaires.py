@@ -1,0 +1,1 @@
+#la durée moyenne des tests oscille entre 1'10" et 2'.

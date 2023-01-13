@@ -152,8 +152,7 @@ def contientMineGrilleDemineur(tab: list, coord: tuple) -> bool:
 def getCoordonneeVoisinsGrilleDemineur(tab: list, coord: tuple) -> list:
     if not isCoordonneeCorrecte(tab, coord) or not type_grille_demineur(tab):
         raise TypeError("getCoordonneeVoisinsGrilleDemineur : un des paramètres n’est pas du bon type.")
-    if 0 > coord[0] or coord[0] >= getNbLignesGrilleDemineur(tab) or 0 > coord[1] or coord[
-        1] >= getNbColonnesGrilleDemineur(tab):
+    if 0 > coord[0] or coord[0] >= getNbLignesGrilleDemineur(tab) or 0 > coord[1] or coord[1] >= getNbColonnesGrilleDemineur(tab):
         raise IndexError("getCoordonneeVoisinsGrilleDemineur : la coordonnée n’est pas dans la grille")
     else:
         res = []
@@ -162,8 +161,6 @@ def getCoordonneeVoisinsGrilleDemineur(tab: list, coord: tuple) -> list:
                 if (i, j) != coord and 0 <= i < getNbLignesGrilleDemineur(tab) and 0 <= j < getNbColonnesGrilleDemineur(
                         tab):
                     res.append((i, j))
-
-        print(res)
     return res
 
 
@@ -179,7 +176,6 @@ def placerMinesGrilleDemineur(tab: list, nb: int, coord: tuple) -> None:
         if not contientMineGrilleDemineur(tab,(i,j)) and (i,j)!=coord:
             setContenuGrilleDemineur(tab,(i,j),const.ID_MINE)
             k -= 1
-    compterMinesVoisinesGrilleDemineur(tab)
     #l'installation de scipy plante sur le venv, j'ai donc du tester avec la version python 3.9 de mon pc mais j'ai tout de meme le doute que la fonction passe le test
     return None
 
@@ -249,23 +245,31 @@ def reinitialiserGrilleDemineur(tab:list)->None:
             reinitialiserCellule(tab[i][j])
     return None
 
+#ne fonctionne pas
 def decouvrirGrilleDemineur(tab:list,coord)->list:
     setVisibleGrilleDemineur(tab,coord,True)
     res=[]
     if getContenuGrilleDemineur(tab,coord)==0:
         pas_mine=True
+        coo = getCoordonneeVoisinsGrilleDemineur(tab, coord)
+        l=[]
         while pas_mine:
-            for i in range(coord[0] - 1, coord[0] + 2, 1):
-                compt=0
-                for j in range(coord[1] - 1, coord[1] + 2, 1):
-                    if (i, j) != coord and 0 <= i < getNbLignesGrilleDemineur(tab) and 0 <= j < getNbColonnesGrilleDemineur(tab) and getContenuGrilleDemineur(tab,(i,j))!=const.ID_MINE:
-                        compt+=1
-                    if 8==compt:
-                        for i in range(coord[0] - 1, coord[0] + 2, 1):
-                            for j in range(coord[1] - 1, coord[1] + 2, 1):
-                                if (i,j) not in res and coord!=(i,j):
-                                    res.append((i, j))
+            coo=res
+            for i in coo:
+                if getContenuGrilleDemineur(tab,i)==const.ID_MINE:
+                    pas_mine=False
+
+            for j in coo:
+                 if coo not in res:
+                    res.append(coo)
+                    pas_mine=False
 
     for i in range(len(res)):
         setVisibleGrilleDemineur(tab,res[i],True)
     return None
+
+
+
+
+
+

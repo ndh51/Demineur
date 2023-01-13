@@ -85,7 +85,7 @@ def isAnnotationCorrecte(anno:str)->bool:
         res=False
     return res
 
-def getAnnotationCellule(cell:dict):
+def getAnnotationCellule(cell:dict)->str:
     # je ne sais pas comment qualifier ce qu'elle renvoie
     if not type_cellule(cell):
         raise TypeError("getAnnotationCellule : le paramètre valeur_du paramètre n’est pas une cellule ")

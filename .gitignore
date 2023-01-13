@@ -8,6 +8,7 @@ __pycache__
 *.exe
 *.db
 /venv/*
+/venv/
 *.gif
 *.html
 *.css
