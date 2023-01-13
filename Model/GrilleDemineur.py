@@ -245,7 +245,7 @@ def reinitialiserGrilleDemineur(tab:list)->None:
             reinitialiserCellule(tab[i][j])
     return None
 
-#ne fonctionne pas
+
 def decouvrirGrilleDemineur(tab:list,coord)->list:
     setVisibleGrilleDemineur(tab,coord,True)
     res=[]
@@ -262,11 +262,34 @@ def decouvrirGrilleDemineur(tab:list,coord)->list:
             for j in coo:
                  if coo not in res:
                     res.append(coo)
-                    pas_mine=False
 
+        for k in range(len(coo)):
+            if getContenuGrilleDemineur(tab,coord)==0:
+                decouvrirGrilleDemineur(tab,coo[k])
     for i in range(len(res)):
         setVisibleGrilleDemineur(tab,res[i],True)
     return None
+
+
+def simplifierGrilleDemineur(tab:list,coord:tuple)->None:
+    if not isVisibleGrilleDemineur(tab,coord):
+        return {}
+    else :
+        coo = getCoordonneeVoisinsGrilleDemineur(tab, coord)
+        compt=0
+        i=0
+        while compt!= getContenuGrilleDemineur(tab,coord) and i<9:
+            if getAnnotationGrilleDemineur(tab,coord)==const.FLAG:
+                compt+=1
+            i+=1
+        for i in range(len(coo)):
+            simplifierGrilleDemineur(tab,coo[i])
+    return coo
+
+
+
+
+
 
 
 
