@@ -256,9 +256,15 @@ def decouvrirGrilleDemineur(tab:list,coord)->list:
         pas_mine=True
         while pas_mine:
             for i in range(coord[0] - 1, coord[0] + 2, 1):
+                compt=0
                 for j in range(coord[1] - 1, coord[1] + 2, 1):
-                    if (i, j) != coord and 0 <= i < getNbLignesGrilleDemineur(tab) and 0 <= j < getNbColonnesGrilleDemineur(tab):
-                    res.append((i, j))
+                    if (i, j) != coord and 0 <= i < getNbLignesGrilleDemineur(tab) and 0 <= j < getNbColonnesGrilleDemineur(tab) and getContenuGrilleDemineur(tab,(i,j))!=const.ID_MINE:
+                        compt+=1
+                    if 8==compt:
+                        for i in range(coord[0] - 1, coord[0] + 2, 1):
+                            for j in range(coord[1] - 1, coord[1] + 2, 1):
+                                if (i,j) not in res and coord!=(i,j):
+                                    res.append((i, j))
 
     for i in range(len(res)):
         setVisibleGrilleDemineur(tab,res[i],True)
