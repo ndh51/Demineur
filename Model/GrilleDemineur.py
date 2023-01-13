@@ -302,10 +302,14 @@ def ajouterFlagsGrilleDemineur(tab:list,coord: tuple)->list:
     return l
 
 def simplifierToutGrilleDemineur(tab:list)->tuple :
+    a=[]
+    b=[]
     for i in range(getNbLignesGrilleDemineur(tab)):
         for j in range(getNbColonnesGrilleDemineur(tab)):
             ajouterFlagsGrilleDemineur(tab,(i,j))
             simplifierGrilleDemineur(tab,(i,j))
+            a.append(ajouterFlagsGrilleDemineur(tab, (i, j)))
+            b.append(simplifierGrilleDemineur(tab, (i, j)))
     return (a,b)
 
 
