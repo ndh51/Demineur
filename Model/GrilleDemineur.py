@@ -287,6 +287,26 @@ def simplifierGrilleDemineur(tab:list,coord:tuple)->None:
     return coo
 
 
+def ajouterFlagsGrilleDemineur(tab:list,coord: tuple)->list:
+    voisins=getCoordonneeVoisinsGrilleDemineur(tab,coord)
+    nombre_voisins=8
+    l=[]
+    for i in range(len(voisins)):
+        if isVisibleGrilleDemineur(tab, voisins[i]):
+            nombre_voisins-=1
+    if nombre_voisins== getContenuGrilleDemineur(tab,coord):
+        for i in voisins:
+            if not isVisibleGrilleDemineur(tab,voisins[i]):
+                setVisibleGrilleDemineur(tab,voisins[i], True)
+                l.append(voisins[i])
+    return l
+
+def simplifierToutGrilleDemineur(tab:list)->tuple :
+    for i in range(getNbLignesGrilleDemineur(tab)):
+        for j in range(getNbColonnesGrilleDemineur(tab)):
+            ajouterFlagsGrilleDemineur(tab,(i,j))
+            simplifierGrilleDemineur(tab,(i,j))
+    return (a,b)
 
 
 
