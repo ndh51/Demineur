@@ -128,7 +128,7 @@ def isVisibleGrilleDemineur(tab: list, coord: tuple) -> bool:
     return res[const.VISIBLE]
 
 
-def setVisibleGrilleDemineur(tab: list, coord: tuple, visible: int) -> bool:
+def setVisibleGrilleDemineur(tab: list, coord: tuple, visible: bool) -> bool:
     if not isCoordonneeCorrecte(tab, coord):
         res = getContenuGrilleDemineur(tab, coord)
     else:
@@ -251,6 +251,7 @@ def reinitialiserGrilleDemineur(tab:list)->None:
 
 def decouvrirGrilleDemineur(tab:list,coord)->list:
     setVisibleGrilleDemineur(tab,coord,True)
+    res=[]
     if getContenuGrilleDemineur(tab,coord)==0:
         pas_mine=True
         while pas_mine:
@@ -258,4 +259,7 @@ def decouvrirGrilleDemineur(tab:list,coord)->list:
                 for j in range(coord[1] - 1, coord[1] + 2, 1):
                     if (i, j) != coord and 0 <= i < getNbLignesGrilleDemineur(tab) and 0 <= j < getNbColonnesGrilleDemineur(tab):
                     res.append((i, j))
+
+    for i in range(len(res)):
+        setVisibleGrilleDemineur(tab,res[i],True)
     return None
