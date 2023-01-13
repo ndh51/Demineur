@@ -248,3 +248,14 @@ def reinitialiserGrilleDemineur(tab:list)->None:
         for j in range(getNbColonnesGrilleDemineur(tab)):
             reinitialiserCellule(tab[i][j])
     return None
+
+def decouvrirGrilleDemineur(tab:list,coord)->list:
+    setVisibleGrilleDemineur(tab,coord,True)
+    if getContenuGrilleDemineur(tab,coord)==0:
+        pas_mine=True
+        while pas_mine:
+            for i in range(coord[0] - 1, coord[0] + 2, 1):
+                for j in range(coord[1] - 1, coord[1] + 2, 1):
+                    if (i, j) != coord and 0 <= i < getNbLignesGrilleDemineur(tab) and 0 <= j < getNbColonnesGrilleDemineur(tab):
+                    res.append((i, j))
+    return None
